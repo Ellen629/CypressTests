@@ -1,49 +1,61 @@
-import { loginPage } from "../pages/SignIn";
-import { data } from "../utils/data";
-describe("SignIn", () => {
+import { registrationPage } from "../pages/SignIn";
+import { validData } from "../utils/data";
+import { validationMessages } from "../utils/messages";
+import { message } from "../utils/messages";
+import { Titles } from "../utils/messages";
+
+describe("Registration", () => {
   it("Verify that the UI matches with the requirements ", () => {
-    loginPage.visit();
-    cy.get('.input').should('have.css', 'border', data.inputBorder);
-    cy.get(':nth-child(4) > .input').should('have.css', 'border', data.inputBorder);
-    cy.get(':nth-child(5) > .button').should('have.css', 'background-color', 'rgb(202, 129, 37)')
-    cy.get('h2').contains('Customer Login');
-    cy.get('h2').should('have.css', 'font-family', data.fontFamily);
-    cy.get('h2').should('have.css', 'font-size', '16px');
-    cy.get('h2').should('have.css', 'color', 'rgb(57, 121, 170)');
-    cy.get(':nth-child(1) > b').contains('Username');
-    cy.get(':nth-child(3) > b').contains('Password');
-   });
+    registrationPage.visit();
+    cy.get('.title').contains(Titles.title);
+    cy.get('#rightPanel > p').contains(Titles.subtitle);
+    registrationPage.getFirstname();
+    cy.get(':nth-child(1) > [align="right"] > b').contains('First Name').and('have.css', 'color', 'rgb(95, 122, 119)');
+    registrationPage.submit().then(($button) => {
+      expect($button).to.have.css('background-color','rgb(202, 129, 37)');
+      expect($button).to.have.value('REGISTER');
+    });
+    registrationPage.submit().click()
+    });
 
-  it("Verify login functionality with valid credentials", () => {
-    loginPage.visit();
-    loginPage.getUsername(data.username);
-    loginPage.getPassword(data.password);
-    loginPage.submit();
-    cy.url().should('include', '/parabank/overview.htm');
+  it("Verify registration functionality with valid credentials", () => {
+    registrationPage.visit();
+    registrationPage.getFirstname().type(validData.firstName);
+    registrationPage.getLastname().type(validData.lastName);
+    registrationPage.getAddress().type(validData.userAddress);
+    registrationPage.getCity().type(validData.userCity);
+    registrationPage.getState().type(validData.userState);
+    registrationPage.getZipCode().type(validData.userZipCode);
+    registrationPage.getPhone().type(validData.userPhone);  
+    registrationPage.getSSN().type(validData.userSSN);
+    registrationPage.getUserName().type(validData.validUserName);
+    registrationPage.getPassword().type(validData.validPassword);
+    registrationPage.getConfirmPassword().type(validData.validRepeatedPass);
+    registrationPage.submit();
+    cy.url().should('include', '/parabank/register.htm');
+    cy.get("#rightPanel > p").then(($text) => {
+      expect($text).to.contain(message.successMessage);
+      });
   });
 
-  it("Verify login functionality with wrong credentials", () => {
-    loginPage.visit();
-    loginPage.getUsername('Username');
-    loginPage.getPassword('begemotik');
-    loginPage.submit();
-    cy.url().should('include', '/parabank/login.htm');
-  });
-
-  it("Verify login functionality with empty password field", () => {
-    loginPage.visit();
-    loginPage.getUsername(data.username);
-    loginPage.getPassword(' ');
-    loginPage.submit();
-    cy.url().should('include', '/parabank/login.htm');
-  });
-
-  it("Verify login functionality with empty username field", () => {
-    loginPage.visit();
-    loginPage.getUsername(' ');
-    loginPage.getPassword(data.password);
-    loginPage.submit();
-    cy.url().should('include', '/parabank/login.htm');
+  it.only("Verify registration functionality with already used user name", () => {
+    registrationPage.visit();
+    registrationPage.getFirstname().type(validData.firstName);
+    registrationPage.getLastname().type(validData.lastName);
+    registrationPage.getAddress().type(validData.userAddress);
+    registrationPage.getCity().type(validData.userCity);
+    registrationPage.getState().type(validData.userState);
+    registrationPage.getZipCode().type(validData.userZipCode);
+    registrationPage.getPhone().type(validData.userPhone);  
+    registrationPage.getSSN().type(validData.userSSN);
+    registrationPage.getUserName().type(validData.validUserName);
+    registrationPage.getPassword().type(validData.validPassword);
+    registrationPage.getConfirmPassword().type(validData.validRepeatedPass);
+    registrationPage.submit();
+    cy.get("#customer.username.errors").then(($error) => {
+       expect($error).to.contain(validationMessages.usedUsernameMessage);
+       });
   });
   
 });
+
