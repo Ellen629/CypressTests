@@ -2,7 +2,12 @@ class SignUp {
     visit(endpoint) {
       cy.visit(Cypress.env('globalUrl')+endpoint);
     }
-  
+    getTitle(){
+      return cy.get('.signup-form > h2')
+    }
+    getName(){
+      return cy.get('[data-qa="name"]')
+    }
    getUsername() {
       return cy.get('[data-qa="signup-name"]');
     }

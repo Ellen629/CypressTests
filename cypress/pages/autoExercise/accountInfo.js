@@ -3,8 +3,26 @@ class MoreUserInfo {
     visit(endpoint) {
       cy.visit(Cypress.env('globalUrl') + endpoint);
     }
-    getGenderTitle(){
+    getSecondTitle(){
+      return cy.get(':nth-child(1) > b')
+    }
+    getAddressInfoTitle(){
+      return cy.get('form > .title > b')
+    }
+    getGenderLabel(){
       return cy.get('.clearfix > label');
+    }
+    getNameLabel(){
+      return cy.get('.login-form > form > :nth-child(3)')
+    }
+    getEmailLabel(){
+      return cy.get('.login-form > form > :nth-child(4)')
+    }
+    getPasswordLabel(){
+      return cy.get('.login-form > form > :nth-child(5)')
+    }
+    getBirthdayLabel(){
+      return cy.get('.login-form > form > :nth-child(6)')
     }
     getMr(){
       return cy.get('[type="radio"]').check("Mr");
@@ -29,6 +47,12 @@ class MoreUserInfo {
     }
     getYears(){
       return cy.get('[data-qa="years"]');
+    }
+    getNewsletter(){
+      return cy.get('#newsletter')
+    }
+    getOptin(){
+      return cy.get('#optin')
     }
     getFirstName(){
       return cy.get('[data-qa="first_name"]')

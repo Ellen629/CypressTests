@@ -9,5 +9,8 @@ export const Titles = {
 }
 
 export const message = {
-    successMessage: 'Welcome username. Your account was created successfully. You are now logged in.'
+    successMessage: 'Welcome username. Your account was created successfully. You are now logged in.',
+    wrongEmailOrPass: "Your email or password is incorrect!",
+    deleteAccount: "Account Deleted!",
+    placedOrder: "Order Placed"
 }
