@@ -4,8 +4,10 @@ import { inputs, signup } from "../utils/data";
 
 let userName,secondUserName
 describe("Registration", () => {
-  it("Verify that the form UI matches with the requirements", () => {
+  beforeEach(() => {
     registration.visit("login");
+  })
+  it("Verify that the form UI matches with the requirements", () => {    
     registration.getTitle()
         .contains(signup.title);
     registration.getUsername()
@@ -24,7 +26,6 @@ describe("Registration", () => {
     });
   })
   it("Verify registration functionality with valid data", () => {
-    registration.visit("login");
     registration.getUsername()
       .type(registration.generateRandomName(5));
     registration.getEmail()
@@ -34,7 +35,6 @@ describe("Registration", () => {
       .should('be.visible');
   })
   it("Verify that with valid data the main URL contains /signup  endpoint", () => {
-    registration.visit("login");
     registration.getUsername()
       .type(registration.generateRandomName(5));
     registration.getEmail()
@@ -43,7 +43,6 @@ describe("Registration", () => {
     cy.url().should('include', '/signup');
   })
   it("Verify registration functionality with Enter keyboard", () => {
-    registration.visit("login");
     registration.getUsername()
       .type(registration.generateRandomName(5));
     registration.getEmail()
@@ -54,7 +53,6 @@ describe("Registration", () => {
   })
 
   it("Verify the valid Name/Email credentials match", () => {
-    registration.visit("login");
     registration.getUsername()
       .type(registration.generateRandomName(5, ""));
     registration
@@ -76,7 +74,6 @@ describe("Registration", () => {
   });
 
   it("Verify registration functionality with empty username", () => {
-    registration.visit("login");
     const emptyUserName = registration.getUsername().clear();
     emptyUserName.blur();
     registration.getUsername()
@@ -87,7 +84,6 @@ describe("Registration", () => {
   });
 
   it("Verify registration functionality with empty email", () => {
-    registration.visit("login");
     registration.getUsername()
       .type(registration.generateRandomName(5));
     const emptyEmail = registration.getEmail().clear();
@@ -98,12 +94,10 @@ describe("Registration", () => {
   });
 
   it("Verify registration functionality without symbol @ in email address", () => {
-    registration.visit("login");
     registration.getUsername()
       .type(registration.generateRandomName(5));
     registration.getEmail()
       .type(registration.generateRandomName(5, "gmail.com"));
     registration.submit().click();
   })
-
 });

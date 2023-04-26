@@ -7,8 +7,10 @@ import { loginData, inputs, validLogin} from "../utils/data";
 import { message } from "../utils/messages";
 
 describe("Login", () => {
-    it("Verify Login UI", () => {
+    beforeEach(() => {
         cy.visit(Cypress.env("globalUrl"));
+      })
+    it("Verify Login UI", () => {        
         login.getNavLogin().click();
         login.getLoginTitle().should('contain', loginData.title);
         login.getLoginEmail()
@@ -22,7 +24,6 @@ describe("Login", () => {
             .and('have.css', 'background-color', inputs.buttonColor);
     })
     it("Verify Login functionality with valid data", () => {
-        cy.visit(Cypress.env("globalUrl"));
         login.getNavLogin().click();
         login.getLoginEmail().type(validLogin.email);
         login.getPassword().type(validLogin.password);
@@ -30,7 +31,6 @@ describe("Login", () => {
         login.getNavLogout().should('be.visible');
     })
     it("Verify Login functionality by using Enter keyboard", () => {
-        cy.visit(Cypress.env("globalUrl"));
         login.getNavLogin().click();
         login.getLoginEmail().type(validLogin.email);
         login.getPassword().type(validLogin.password);
@@ -38,27 +38,24 @@ describe("Login", () => {
         login.getNavLogout().should('be.visible');      
     })
     it("Verify Login functionality with invalid email address", () => {
-        cy.visit(Cypress.env("globalUrl"));
         login.getNavLogin().click();
         login.getLoginEmail().type(`${validLogin.email} test`);
         login.getPassword().type(validLogin.password);
         login.getLoginBtn().click();
         login.getError()
-            .should('be.visible')  
-            .and('contain', message.wrongEmailOrPass);
+             .should('be.visible')  
+             .and('contain', message.wrongEmailOrPass);
     })
     it("Verify Login functionality with invalid password", () => {
-        cy.visit(Cypress.env("globalUrl"));
         login.getNavLogin().click();
         login.getLoginEmail().type(validLogin.email);
         login.getPassword().type(`${validLogin.password} 44`);
         login.getLoginBtn().click();
         login.getError()
-            .should('be.visible')  
-            .and('contain', message.wrongEmailOrPass);
+             .should('be.visible')  
+             .and('contain', message.wrongEmailOrPass);
     })
     it("Verify Login functionality with empty email address field", () => {
-        cy.visit(Cypress.env("globalUrl"));
         login.getNavLogin().click();
         const emptyEmail = login.getLoginEmail().clear();
         emptyEmail.blur();   
@@ -67,7 +64,6 @@ describe("Login", () => {
         login.getLoginEmail().should('have.attr', inputs.requiredField);
     })
     it("Verify Login functionality with empty password field", () => {
-        cy.visit(Cypress.env("globalUrl"));
         login.getNavLogin().click();
         login.getLoginEmail().type(validLogin.email);
         const emptyPassword = login.getPassword().clear();
@@ -76,7 +72,6 @@ describe("Login", () => {
         login.getPassword().should('have.attr', inputs.requiredField);
     })
     it("Verify Delete Account functionality", () => {
-        cy.visit(Cypress.env("globalUrl"));
         login.getNavLogin().click();
         login.getLoginEmail().type(validLogin.email);
         login.getPassword().type(validLogin.password);

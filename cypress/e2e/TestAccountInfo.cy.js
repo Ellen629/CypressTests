@@ -33,7 +33,7 @@ describe("Additional info about the user", () => {
       moreUserInfo.getBirthdayLabel()
         .contains(signup.labelBirthday);
   })
-    it("Verify that the fields are filled with valid data", () => {
+    it.only("Verify that the fields are filled with valid data", () => {
       moreUserInfo.getMr();
       moreUserInfo.getName();
       moreUserInfo.getEmail();
@@ -114,12 +114,11 @@ it("Verify that the mobile number field do not accept letters", () => {
       moreUserInfo.getMobile().type('test')
       moreUserInfo.getCreateAccount().click();
 })
-// it("Verify that the user can't register with already used email address", () => {
-//   registration.visit("login");
-//     registration.getUsername()
-//       .type(registration.generateRandomName(5));
-//     registration.getEmail().type(validLogin.email)   
-//   moreUserInfo.getCreateAccount().click();
-// })
-    
+it.skip("Verify that the user can't register with already used email address", () => {
+  registration.visit("login");
+    registration.getUsername()
+      .type(registration.generateRandomName(5));
+    registration.getEmail().type(validLogin.email)   
+  moreUserInfo.getCreateAccount().click();
+})   
 })

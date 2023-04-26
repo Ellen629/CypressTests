@@ -2,7 +2,7 @@ import { carusel } from "../pages/autoExercise/carusel";
 import { loginData, inputs, validLogin, caruselInfo} from "../utils/data";
 
 describe("Carusel", () => {
-    it.only("Loads the homepage and checks for icons", () => {
+    it("Loads the homepage and checks for icons", () => {
       cy.visit(Cypress.env("globalUrl"));
       carusel.getItem().then(($elem) => {
         expect($elem).to.contain(caruselInfo.firstText)

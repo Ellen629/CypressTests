@@ -7,8 +7,10 @@ import { loginData, inputs, validLogin, addToCart, personalInfo} from "../utils/
 import { message } from "../utils/messages";
 
 describe("Add carts to the basket", () => {
-    it("Verify the UI of the Cart", () => {
+    beforeEach(() => {
         cy.visit(Cypress.env("globalUrl"));
+      })
+    it("Verify the UI of the Cart", () => {       
         shopping.getTitle().contains(addToCart.title);
         shopping.getFirstCartImg();
         shopping.getFirstCarth2()
@@ -22,22 +24,18 @@ describe("Add carts to the basket", () => {
             .should('have.css', 'color', inputs.viewProductColor);
     })
     it("Check the quantity of the carts", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getCartsQty();
     })
     it("Verify that in the beginning the Cart section is empty", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getNavCart().click();
         cy.url('includes', 'view_cart');
         shopping.getEmptyCart().contains(addToCart.emptyCart)
     })
     it("Verify Add to Cart functionality", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal().should('be.visible');
     })
     it("Verify the content of the modal", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal()
             .should('be.visible')
@@ -58,7 +56,6 @@ describe("Add carts to the basket", () => {
     })
     
     it("Verify that clicking on the Continue Shopping button, the modal closes", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal().should('be.visible');
         shopping.getContinueShopping().click();
@@ -66,26 +63,22 @@ describe("Add carts to the basket", () => {
     })
 
     it("Verify View Product button functionality", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartViewProduct().click();
         cy.url('includes', 'product_details/1')
     })
     it("Verify View Cart button functionality", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal().should('be.visible');
         shopping.getFirstViewCart().click();
         cy.url('includes', 'view_cart');
     })
     it("Verify that clicking on the Add to cart, the quantity of the product increases", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal().should('be.visible');
         shopping.getFirstViewCart().click();
         shopping.getEachProduct().contains('1');
     })
     it("Verify that clicking on X, the product is removed from the Cart", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal().should('be.visible');
         shopping.getFirstViewCart().click();
@@ -94,7 +87,6 @@ describe("Add carts to the basket", () => {
         cy.get('#cart_info').should('not.contain', '#product-1');
     })
     it("Verify Proceed button functionality", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal().should('be.visible');
         shopping.getFirstViewCart().click();
@@ -104,7 +96,6 @@ describe("Add carts to the basket", () => {
         shopping.getModal().should('be.visible');
     })
     it("Verify Login functionality of the modal", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal().should('be.visible');
         shopping.getFirstViewCart().click();
@@ -120,7 +111,6 @@ describe("Add carts to the basket", () => {
         cy.url('includes', 'account_created')
     })
     it.only("Verify Proceed checkout", () => {
-        cy.visit(Cypress.env("globalUrl"));
         shopping.getFirstCartBtn().click();
         shopping.getModal().should('be.visible');
         shopping.getFirstViewCart().click();

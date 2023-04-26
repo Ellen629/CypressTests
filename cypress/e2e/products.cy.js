@@ -7,8 +7,10 @@ import { inputs, addToCart, personalInfo, product } from "../utils/data";
 let numberCountPolo, number;
 
 describe("Product info", () => {
-    it("Verify the UI of the CATEGORY", () => {
+    beforeEach(() => {
         cy.visit(Cypress.env("globalUrl") + "products");
+      })
+    it("Verify the UI of the CATEGORY", () => {        
         Product.getCategory().should("contain", "Category");
         Product.getWomenAccordion().click();
         Product.getContentOfWomen().then(($el)=>{
@@ -28,26 +30,22 @@ describe("Product info", () => {
         })   
     })
     it("Check the search functionality", () => {
-        cy.visit(Cypress.env("globalUrl") + "products");
         Product.getSearch().type("Blue Top");
         Product.getSearchSubmit().click();
         shopping.getItems().should("contain", "Blue Top");
     })
     it("Check the quantity of the carts", () => {
-        cy.visit(Cypress.env("globalUrl") + "products");
         Product.getPolo().invoke('text').then(($el)=>{
             numberCountPolo = $el.replace('(',"");           
         })   
     })
    it.skip("Compare the qunatity of the searched products", () => {
-    cy.visit(Cypress.env("globalUrl") + "products");
     cy.get('.brands-name > .nav > :nth-child(1) > a').click()
     cy.get('.product-overlay').each(($el, index, $list) => {
         expect($list).to.have.length(number)
     });
    }) 
     it('Verify scroll up button functionality', () => {
-        cy.visit(Cypress.env("globalUrl") + "products");
         cy.scrollTo('bottom');
         Product.getScrollUp().click().scrollTo('top', {ensureScrollable: false});
     })
