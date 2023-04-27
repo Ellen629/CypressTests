@@ -1,5 +1,5 @@
 {
-  "name": "cypresstests",
+  "name": "cypresstestsaca",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,16 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ellen629/CypressTests.git"
+    "url": "git+https://github.com/andtovmas/CypressTestsAca.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ellen629/CypressTests/issues"
+    "url": "https://github.com/andtovmas/CypressTestsAca/issues"
   },
-  "homepage": "https://github.com/Ellen629/CypressTests#readme",
+  "homepage": "https://github.com/andtovmas/CypressTestsAca#readme",
   "devDependencies": {
-    "cypress": "^12.9.0",
-    "install": "^0.13.0"
+    "cypress": "^12.9.0"
+  },
+  "dependencies": {
+    "cypress-dotenv": "^2.0.0",
+    "cypress-real-events": "^1.7.6",
+    "dotenv": "^16.0.3"
   }
 }
