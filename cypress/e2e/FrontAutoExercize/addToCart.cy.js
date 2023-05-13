@@ -1,10 +1,10 @@
-import { moreUserInfo } from "../pages/autoExercise/accountInfo";
-import { registration } from "../pages/autoExercise/signUp";
-import { Product} from "../pages/autoExercise/allProducts";
-import { shopping} from "../pages/autoExercise/carts";
-import {login} from "../pages/autoExercise/login";
-import { loginData, inputs, validLogin, addToCart, personalInfo} from "../utils/data";
-import { message } from "../utils/messages";
+import { moreUserInfo } from "../../pages/autoExercise/accountInfo";
+import { registration } from "../../pages/autoExercise/signUp";
+import { Product} from "../../pages/autoExercise/allProducts";
+import { shopping} from "../../pages/autoExercise/carts";
+import {login} from "../../pages/autoExercise/login";
+import { loginData, inputs, validLogin, addToCart, personalInfo} from "../../utils/data";
+import { message } from "../../utils/messages";
 
 describe("Add carts to the basket", () => {
     beforeEach(() => {

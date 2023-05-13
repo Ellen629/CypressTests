@@ -2,6 +2,7 @@ import { registration } from "../pages/autoExercise/signUp";
 import { moreUserInfo } from "../pages/autoExercise/accountInfo";
 import { inputs, signup } from "../utils/data";
 
+
 let userName,secondUserName
 describe("Registration", () => {
   beforeEach(() => {

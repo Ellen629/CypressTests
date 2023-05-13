@@ -1,11 +1,5 @@
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { 
-  
-// })
+import {bodyData} from "../fixtures/bodyDataPosts.json"
 
-//function for random name generation 
 Cypress.Commands.add('generateRandomName', (length) => { 
      let result = '';
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -22,10 +16,23 @@ Cypress.Commands.add('generateRandomName', (length) => {
 Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { 
 
 })
-//
-//
-// -- This will overwrite an existing command --
-//  Cypress.Commands.overwrite('visit', (originalFn, url, options) => { 
 
 
-//  })
+Cypress.Commands.add(
+  "addNewPost",
+  (newBodyData=bodyData) => {
+    cy.fixture("bodyDataPosts").then(() => {
+        cy.request({
+        method: "POST",
+        url: "https://jsonplaceholder.typicode.com/posts",
+        failOnStatusCode: false,
+         body: newBodyData,
+      }).then((response) => {
+        const itemId = response.body.id;
+        cy.request({
+          method: 'DELETE',
+          url: `https://jsonplaceholder.typicode.com/posts/${itemId}`
+        })
+    });
+    })
+  });

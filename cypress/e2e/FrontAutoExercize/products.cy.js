@@ -1,8 +1,8 @@
-import { moreUserInfo } from "../pages/autoExercise/accountInfo";
-import { registration } from "../pages/autoExercise/signUp";
-import { Product} from "../pages/autoExercise/allProducts";
-import { shopping} from "../pages/autoExercise/carts"
-import { inputs, addToCart, personalInfo, product } from "../utils/data";
+import { moreUserInfo } from "../../pages/autoExercise/accountInfo";
+import { registration } from "../../pages/autoExercise/signUp";
+import { Product} from "../../pages/autoExercise/allProducts";
+import { shopping} from "../../pages/autoExercise/carts"
+import { inputs, addToCart, personalInfo, product } from "../../utils/data";
 
 let numberCountPolo, number;
 

@@ -1,5 +1,5 @@
-import { carusel } from "../pages/autoExercise/carusel";
-import { loginData, inputs, validLogin, caruselInfo} from "../utils/data";
+import { carusel } from "../../pages/autoExercise/carusel";
+import { loginData, inputs, validLogin, caruselInfo} from "../../utils/data";
 
 describe("Carusel", () => {
     it("Loads the homepage and checks for icons", () => {

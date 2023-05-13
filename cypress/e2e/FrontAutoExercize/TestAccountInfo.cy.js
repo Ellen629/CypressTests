@@ -1,7 +1,7 @@
-import { moreUserInfo } from "../pages/autoExercise/accountInfo";
-import { registration } from "../pages/autoExercise/signUp";
-import { login } from "../pages/autoExercise/login";
-import { inputs, signup, personalInfo, validLogin } from "../utils/data";
+import { moreUserInfo } from "../../pages/autoExercise/accountInfo";
+import { registration } from "../../pages/autoExercise/signUp";
+import { login } from "../../pages/autoExercise/login";
+import { inputs, signup, personalInfo, validLogin } from "../../utils/data";
 
 describe("Additional info about the user", () => {
   beforeEach(() => {
